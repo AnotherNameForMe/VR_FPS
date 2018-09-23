@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "ChooseNextWaypoint.generated.h"
 
 /**
@@ -16,5 +17,9 @@ class VR_FPS_API UChooseNextWaypoint : public UBTTaskNode
 
 		virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 	
-	
+protected:
+	UPROPERTY(EditAnywhere)
+		struct FBlackboardKeySelector IndexKey;
+	UPROPERTY(EditAnywhere)
+		struct FBlackboardKeySelector WaypointKey;
 };
