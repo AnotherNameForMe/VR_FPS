@@ -14,6 +14,7 @@ class VR_FPS_API AVR_Character : public ACharacter
 	GENERATED_BODY()
 
 public:
+	
 	// Sets default values for this character's properties
 	AVR_Character();
 
@@ -29,29 +30,31 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(BlueprintReadWrite)
-		class USceneComponent* VRRoot;
+
 
 private:
 
 	void MoveForward(float Throttle);
 	void MoveRight(float Throttle);
 
-	void RightTriggerPressed() { if (RightHandController) RightHandController->TriggerPressed(); }
-	void RightTriggerReleased() { if (RightHandController) RightHandController->TriggerReleased(); }
+	
 
 
 private:
 	UPROPERTY(VisibleAnywhere)
 		class UCameraComponent* Camera;
 
-
+	UPROPERTY(EditDefaultsOnly)
+		class USceneComponent* VRRoot;
 
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AHandControllerBase> HandControllerClass;
 
 	UPROPERTY()
 		AHandControllerBase* RightHandController;
+
+	UPROPERTY()
+		AHandControllerBase* LeftHandController;
 
 
 

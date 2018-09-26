@@ -17,8 +17,9 @@ public:
 	// Sets default values for this actor's properties
 	AHandControllerBase();
 
-	virtual void TriggerPressed() {};
-	virtual void TriggerReleased() {};
+	void SetHand(EControllerHand Hand) { MotionController->SetTrackingSource(Hand); }
+	void PairController(AHandControllerBase* Controller);
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,5 +33,10 @@ public:
 	// Components
 	UPROPERTY(VisibleAnywhere)
 		UMotionControllerComponent* MotionController;
+
+private:
+	AHandControllerBase* OtherController;
+
+	
 
 };

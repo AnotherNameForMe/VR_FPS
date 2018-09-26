@@ -2,6 +2,12 @@
 
 #include "HandControllerBase.h"
 
+#include"GameFramework/Pawn.h"
+#include"GameFramework/PlayerController.h"
+#include "Haptics/HapticFeedbackEffect_Base.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 // Sets default values
 AHandControllerBase::AHandControllerBase()
@@ -11,8 +17,7 @@ AHandControllerBase::AHandControllerBase()
 
 	MotionController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MotionController"));
 	SetRootComponent(MotionController);
-	MotionController->SetTrackingSource(EControllerHand::Right);
-	MotionController->SetShowDeviceModel(true);
+	
 }
 
 // Called when the game starts or when spawned
@@ -28,4 +33,9 @@ void AHandControllerBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+void AHandControllerBase::PairController(AHandControllerBase * Controller)
+{
+	OtherController = Controller;
+	OtherController->OtherController = this;
 
+}

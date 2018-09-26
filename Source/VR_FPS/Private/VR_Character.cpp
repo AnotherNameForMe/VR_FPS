@@ -28,15 +28,24 @@ void AVR_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (HandControllerClass)
+	LeftHandController = GetWorld()->SpawnActor<AHandControllerBase>(HandControllerClass);
+	if (LeftHandController != nullptr)
 	{
-		RightHandController = GetWorld()->SpawnActor<AHandControllerBase>(HandControllerClass);
-		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
+		LeftHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::KeepRelativeTransform);
+		LeftHandController->SetHand(EControllerHand::Left);
+	}
 
-		;
+	RightHandController = GetWorld()->SpawnActor<AHandControllerBase>(HandControllerClass);
+	if (RightHandController != nullptr)
+	{
+		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::KeepRelativeTransform);
+		RightHandController->SetHand(EControllerHand::Right);
 
 	}
+
+	LeftHandController->PairController(RightHandController);
 }
+
 
 // Called every frame
 void AVR_Character::Tick(float DeltaTime)
@@ -57,9 +66,7 @@ void AVR_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 	PlayerInputComponent->BindAxis(TEXT("Forward"), this, &AVR_Character::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("Right"), this, &AVR_Character::MoveRight);
-	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Pressed, this, &AVR_Character::RightTriggerPressed);
-	PlayerInputComponent->BindAction(TEXT("RightTrigger"), EInputEvent::IE_Released, this, &AVR_Character::RightTriggerReleased);
-
+	
 }
 
 void AVR_Character::MoveForward(float Throttle)
