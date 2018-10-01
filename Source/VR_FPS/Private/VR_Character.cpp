@@ -66,7 +66,10 @@ void AVR_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 	PlayerInputComponent->BindAxis(TEXT("Forward"), this, &AVR_Character::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("Right"), this, &AVR_Character::MoveRight);
-	
+	PlayerInputComponent->BindAction(TEXT("GripLeft"), IE_Pressed, this, &AVR_Character::GripLeft);
+	PlayerInputComponent->BindAction(TEXT("GripRight"), IE_Pressed, this, &AVR_Character::GripRight);
+	PlayerInputComponent->BindAction(TEXT("ReleaseLeft"), IE_Released, this, &AVR_Character::ReleaseLeft);
+	PlayerInputComponent->BindAction(TEXT("ReleaseRight"), IE_Released, this, &AVR_Character::ReleaseRight);
 }
 
 void AVR_Character::MoveForward(float Throttle)

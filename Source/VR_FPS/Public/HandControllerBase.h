@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MotionControllerComponent.h"
+#include "PickUpBase.h"
+#include "Components/SceneComponent.h"
 
 #include "HandControllerBase.generated.h"
 
@@ -19,7 +21,8 @@ public:
 
 	void SetHand(EControllerHand Hand) { MotionController->SetTrackingSource(Hand); }
 	void PairController(AHandControllerBase* Controller);
-	
+	void Grip();
+	void Release();
 
 protected:
 	// Called when the game starts or when spawned
@@ -34,9 +37,20 @@ public:
 	UPROPERTY(VisibleAnywhere)
 		UMotionControllerComponent* MotionController;
 
+	
 private:
 	AHandControllerBase* OtherController;
 
-	
+	UFUNCTION()
+		void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	UFUNCTION()
+		void ActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	UPROPERTY(EditDefaultsOnly)
+		class UHapticFeedbackEffect_Base* HapticEffect;
 
+	bool CanGrab() const;
+	bool bCanGrab = false;
+	bool bIsGrabbed = false;
+
+	FVector GrabLoc;
 };

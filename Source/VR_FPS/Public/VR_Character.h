@@ -36,7 +36,10 @@ private:
 
 	void MoveForward(float Throttle);
 	void MoveRight(float Throttle);
-
+	void GripLeft() { LeftHandController->Grip(); }
+	void ReleaseLeft() { LeftHandController->Release(); }
+	void GripRight() { RightHandController->Grip(); }
+	void ReleaseRight() { RightHandController->Release(); }
 	
 
 
