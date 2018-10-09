@@ -77,7 +77,6 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 
-Content/AnimStarterPack/
-Content/PolygonCity/
-Content/PolygonHeist/
-Content/PolygonKnights/
+Content/AnimStarterPack/*
+Content/Art/*
+Content/Mannequin/*
