@@ -33,12 +33,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 
+	
+
+	
+private:
+
 	// Components
 	UPROPERTY(VisibleAnywhere)
 		UMotionControllerComponent* MotionController;
 
-	
-private:
 	AHandControllerBase* OtherController;
 
 	UFUNCTION()
